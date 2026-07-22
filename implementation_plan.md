@@ -120,36 +120,38 @@ interface without touching UI code.
 ## 4. Milestones
 
 ### M0 — Project Setup (foundation)
-- [ ] Scaffold Vite + React + TypeScript project.
-- [ ] Configure ESLint, Prettier, strict `tsconfig`.
-- [ ] Add Vitest + React Testing Library; a smoke test.
-- [ ] Set up GitHub Actions CI (lint, typecheck, test, build).
-- [ ] Base app shell: layout, routing (Explore / Exercises / Planner), theming.
-- [ ] Define shared `types/` and the `DataRepository` interface.
+- [x] Scaffold Vite + React + TypeScript project.
+- [x] Configure ESLint, Prettier, strict `tsconfig`.
+- [x] Add Vitest + React Testing Library; a smoke test.
+- [x] Set up GitHub Actions CI (lint, typecheck, test, build).
+- [x] Base app shell: layout, routing (Explore / Exercises / Planner), theming.
+- [x] Define shared `types/` and the `DataRepository` interface.
 
 **Exit criteria:** `npm run dev` boots the shell; CI green.
 
 ### M1 — Explore (muscular + skeletal)
-- [ ] Integrate `@react-three/fiber` scene: lighting, orbit controls, camera.
-- [ ] Load a base 3D body model (muscular + skeletal); document source/license.
-- [ ] Map model meshes → `Structure` ids (`meshIds`).
-- [ ] System layer toggles + opacity (peel muscles off bones).
-- [ ] Structure picking (click/tap) → highlight + selection state.
-- [ ] Info panel: name, anatomical name, description, function, relations.
-- [ ] Search structures by name → fly camera to structure.
-- [ ] Accessible fallback: searchable structure list + info panel (no WebGL required).
-- [ ] Curated M1 dataset: major muscles + bones.
+- [x] Integrate `@react-three/fiber` scene: lighting, orbit controls, camera.
+- [x] Load a base 3D body model (muscular + skeletal); document source/license.
+      *(M1 uses a procedural primitive "mannequin"; see docs/MODEL_MAPPING.md. A rigged
+      asset can swap in later via the same structure-id mapping.)*
+- [x] Map model meshes → `Structure` ids (`meshIds`).
+- [x] System layer toggles + opacity (peel muscles off bones).
+- [x] Structure picking (click/tap) → highlight + selection state.
+- [x] Info panel: name, anatomical name, description, function, relations.
+- [x] Search structures by name → fly camera to structure.
+- [x] Accessible fallback: searchable structure list + info panel (no WebGL required).
+- [x] Curated M1 dataset: major muscles + bones.
 
 **Exit criteria:** user can explore, select, and read about muscular & skeletal
 structures in 3D and via the fallback list.
 
 ### M2 — Train (exercises, studies, more systems)
-- [ ] Add respiratory + cardiovascular structures to model & data.
-- [ ] Exercise library UI: list, filter by focus tag and by targeted structure.
-- [ ] Exercise detail: cues, common mistakes, variations, targeted structures.
-- [ ] Cross-linking: structure → exercises, exercise → structures.
-- [ ] Studies: curated dataset + contextual display from structures & exercises.
-- [ ] Focus-tag support for boneDensity, vo2max, breathWork.
+- [x] Add respiratory + cardiovascular structures to model & data.
+- [x] Exercise library UI: list, filter by focus tag and by targeted structure.
+- [x] Exercise detail: cues, common mistakes, variations, targeted structures.
+- [x] Cross-linking: structure → exercises, exercise → structures.
+- [x] Studies: curated dataset + contextual display from structures & exercises.
+- [x] Focus-tag support for boneDensity, vo2max, breathWork.
 
 **Exit criteria:** every exercise links to structures and ≥1 study; all four systems
 are viewable.

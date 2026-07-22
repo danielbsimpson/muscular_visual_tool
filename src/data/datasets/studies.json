@@ -1,0 +1,65 @@
+[
+  {
+    "id": "schoenfeld-2010-hypertrophy",
+    "title": "The mechanisms of muscle hypertrophy and their application to resistance training",
+    "authors": "Schoenfeld BJ",
+    "year": 2010,
+    "url": "https://pubmed.ncbi.nlm.nih.gov/20847704/",
+    "summary": "Reviews the three primary drivers of muscle growth: mechanical tension, muscle damage, and metabolic stress.",
+    "relevance": "Explains why progressively loaded resistance exercise builds muscle size."
+  },
+  {
+    "id": "schoenfeld-2017-volume",
+    "title": "Dose-response relationship between weekly resistance training volume and increases in muscle mass: a systematic review and meta-analysis",
+    "authors": "Schoenfeld BJ, Ogborn D, Krieger JW",
+    "year": 2017,
+    "url": "https://pubmed.ncbi.nlm.nih.gov/27433992/",
+    "summary": "Higher weekly set volumes produced greater gains in muscle mass, with a graded dose-response.",
+    "relevance": "Supports accumulating enough weekly sets per muscle when programming for hypertrophy."
+  },
+  {
+    "id": "schoenfeld-2017-load",
+    "title": "Strength and hypertrophy adaptations between low- vs. high-load resistance training: a systematic review and meta-analysis",
+    "authors": "Schoenfeld BJ, Grgic J, Ogborn D, Krieger JW",
+    "year": 2017,
+    "url": "https://pubmed.ncbi.nlm.nih.gov/28834797/",
+    "summary": "Both light and heavy loads grow muscle similarly when sets are taken near failure; heavier loads favour maximal strength.",
+    "relevance": "Lets trainees choose loads that fit the goal — strength or hypertrophy — with either working for size."
+  },
+  {
+    "id": "milanovic-2015-hiit-vo2max",
+    "title": "Effectiveness of high-intensity interval training (HIIT) and continuous endurance training for VO2max improvements: a systematic review and meta-analysis",
+    "authors": "Milanović Z, Sporiš G, Weston M",
+    "year": 2015,
+    "url": "https://pubmed.ncbi.nlm.nih.gov/26243014/",
+    "summary": "HIIT and moderate continuous training both raise VO2max, with HIIT producing slightly larger improvements.",
+    "relevance": "Backs interval and steady-state cardio as effective ways to build aerobic capacity."
+  },
+  {
+    "id": "seiler-2010-intensity-distribution",
+    "title": "What is best practice for training intensity and duration distribution in endurance athletes?",
+    "authors": "Seiler S",
+    "year": 2010,
+    "url": "https://pubmed.ncbi.nlm.nih.gov/20861519/",
+    "summary": "Describes polarized training — a large base of low-intensity work with smaller amounts of high-intensity effort.",
+    "relevance": "Frames why easy-paced aerobic (zone 2) work forms the backbone of endurance development."
+  },
+  {
+    "id": "hong-2018-resistance-bone",
+    "title": "Effects of resistance exercise on bone health",
+    "authors": "Hong AR, Kim SW",
+    "year": 2018,
+    "url": "https://pubmed.ncbi.nlm.nih.gov/30513557/",
+    "summary": "Reviews evidence that mechanical loading from resistance exercise stimulates bone formation and preserves bone mineral density.",
+    "relevance": "Explains why loaded, weight-bearing movements support skeletal health and bone density."
+  },
+  {
+    "id": "hamasaki-2020-diaphragmatic-breathing",
+    "title": "Effects of diaphragmatic breathing on health: a narrative review",
+    "authors": "Hamasaki H",
+    "year": 2020,
+    "url": "https://pubmed.ncbi.nlm.nih.gov/33076360/",
+    "summary": "Slow diaphragmatic breathing is associated with improved autonomic balance, reduced stress, and better respiratory function.",
+    "relevance": "Supports dedicated breath-work drills that train the diaphragm and respiratory control."
+  }
+]

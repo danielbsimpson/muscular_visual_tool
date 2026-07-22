@@ -1,0 +1,337 @@
+[
+  {
+    "id": "barbell-bench-press",
+    "name": "Barbell Bench Press",
+    "focus": ["strength", "hypertrophy"],
+    "targets": [
+      { "structureId": "pectoralis-major", "role": "primary" },
+      { "structureId": "triceps-brachii", "role": "secondary" },
+      { "structureId": "deltoids", "role": "secondary" }
+    ],
+    "cues": [
+      "Set the shoulder blades back and down against the bench.",
+      "Lower the bar to the mid-chest with elbows about 45 degrees from the torso.",
+      "Drive the feet into the floor and press the bar back over the shoulders."
+    ],
+    "commonMistakes": [
+      "Flaring the elbows straight out to the sides.",
+      "Bouncing the bar off the chest.",
+      "Lifting the hips off the bench to move the load."
+    ],
+    "variations": [
+      { "id": "dumbbell-bench-press", "name": "Dumbbell Bench Press", "note": "Greater range of motion and independent arm control.", "difficulty": "alternate" },
+      { "id": "push-up", "name": "Push-Up", "note": "Bodyweight regression that trains the same pressing pattern.", "difficulty": "easier" },
+      { "id": "close-grip-bench", "name": "Close-Grip Bench Press", "note": "Narrower grip shifts emphasis to the triceps.", "difficulty": "harder" }
+    ],
+    "studyIds": ["schoenfeld-2010-hypertrophy", "schoenfeld-2017-load"]
+  },
+  {
+    "id": "pull-up",
+    "name": "Pull-Up",
+    "focus": ["strength", "hypertrophy"],
+    "targets": [
+      { "structureId": "latissimus-dorsi", "role": "primary" },
+      { "structureId": "biceps-brachii", "role": "secondary" },
+      { "structureId": "forearm-flexors", "role": "secondary" }
+    ],
+    "cues": [
+      "Start from a full hang with shoulders active, not slack.",
+      "Pull the elbows down and back to bring the chest toward the bar.",
+      "Control the descent all the way back to a straight-arm hang."
+    ],
+    "commonMistakes": [
+      "Kipping or swinging to generate momentum.",
+      "Stopping short of full extension at the bottom.",
+      "Shrugging the shoulders up toward the ears."
+    ],
+    "variations": [
+      { "id": "assisted-pull-up", "name": "Band-Assisted Pull-Up", "note": "A band offloads part of your bodyweight.", "difficulty": "easier" },
+      { "id": "lat-pulldown", "name": "Lat Pulldown", "note": "Machine version with adjustable load.", "difficulty": "easier" },
+      { "id": "weighted-pull-up", "name": "Weighted Pull-Up", "note": "Add load via a belt once bodyweight reps are easy.", "difficulty": "harder" }
+    ],
+    "studyIds": ["schoenfeld-2010-hypertrophy", "schoenfeld-2017-volume"]
+  },
+  {
+    "id": "barbell-back-squat",
+    "name": "Barbell Back Squat",
+    "focus": ["strength", "hypertrophy", "boneDensity"],
+    "targets": [
+      { "structureId": "quadriceps", "role": "primary" },
+      { "structureId": "gluteus-maximus", "role": "secondary" },
+      { "structureId": "hamstrings", "role": "secondary" },
+      { "structureId": "femur", "role": "secondary" },
+      { "structureId": "vertebral-column", "role": "secondary" }
+    ],
+    "cues": [
+      "Brace the core and keep the whole foot planted.",
+      "Break at the hips and knees together, sitting down between the legs.",
+      "Descend to at least parallel, then drive the floor away to stand."
+    ],
+    "commonMistakes": [
+      "Letting the knees cave inward on the way up.",
+      "Rounding the lower back at the bottom.",
+      "Rising onto the toes and shifting weight forward."
+    ],
+    "variations": [
+      { "id": "goblet-squat", "name": "Goblet Squat", "note": "Front-loaded and easier to learn.", "difficulty": "easier" },
+      { "id": "front-squat", "name": "Front Squat", "note": "Bar on the front rack shifts load onto the quads.", "difficulty": "harder" },
+      { "id": "box-squat", "name": "Box Squat", "note": "A box sets a consistent depth target.", "difficulty": "alternate" }
+    ],
+    "studyIds": ["hong-2018-resistance-bone", "schoenfeld-2017-load"]
+  },
+  {
+    "id": "conventional-deadlift",
+    "name": "Conventional Deadlift",
+    "focus": ["strength", "boneDensity"],
+    "targets": [
+      { "structureId": "gluteus-maximus", "role": "primary" },
+      { "structureId": "hamstrings", "role": "primary" },
+      { "structureId": "latissimus-dorsi", "role": "secondary" },
+      { "structureId": "forearm-flexors", "role": "secondary" },
+      { "structureId": "vertebral-column", "role": "secondary" },
+      { "structureId": "femur", "role": "secondary" }
+    ],
+    "cues": [
+      "Set the bar over mid-foot and take the slack out before pulling.",
+      "Keep a neutral spine and the lats tight to hold the bar close.",
+      "Push the floor away and finish by standing tall with locked hips."
+    ],
+    "commonMistakes": [
+      "Rounding the lower back under load.",
+      "Letting the bar drift away from the shins.",
+      "Jerking the bar off the floor instead of building tension first."
+    ],
+    "variations": [
+      { "id": "trap-bar-deadlift", "name": "Trap-Bar Deadlift", "note": "Neutral handles are friendlier to the lower back.", "difficulty": "easier" },
+      { "id": "rack-pull", "name": "Rack Pull", "note": "Shortened range from pins for heavier loading.", "difficulty": "alternate" },
+      { "id": "deficit-deadlift", "name": "Deficit Deadlift", "note": "Standing on a plate adds range of motion.", "difficulty": "harder" }
+    ],
+    "studyIds": ["hong-2018-resistance-bone", "schoenfeld-2010-hypertrophy"]
+  },
+  {
+    "id": "overhead-press",
+    "name": "Standing Overhead Press",
+    "focus": ["strength", "hypertrophy"],
+    "targets": [
+      { "structureId": "deltoids", "role": "primary" },
+      { "structureId": "triceps-brachii", "role": "secondary" },
+      { "structureId": "trapezius", "role": "secondary" }
+    ],
+    "cues": [
+      "Start with the bar on the front of the shoulders and elbows under the bar.",
+      "Brace the core and glutes to keep the torso from arching.",
+      "Press straight up and shrug the shoulders once the bar clears the head."
+    ],
+    "commonMistakes": [
+      "Leaning back into a standing incline press.",
+      "Pressing the bar forward instead of overhead.",
+      "Failing to lock out fully at the top."
+    ],
+    "variations": [
+      { "id": "seated-db-press", "name": "Seated Dumbbell Press", "note": "Seated and supported for more shoulder isolation.", "difficulty": "easier" },
+      { "id": "push-press", "name": "Push Press", "note": "A leg drive lets you move heavier loads.", "difficulty": "harder" }
+    ],
+    "studyIds": ["schoenfeld-2017-load"]
+  },
+  {
+    "id": "barbell-row",
+    "name": "Barbell Bent-Over Row",
+    "focus": ["hypertrophy", "strength"],
+    "targets": [
+      { "structureId": "latissimus-dorsi", "role": "primary" },
+      { "structureId": "trapezius", "role": "secondary" },
+      { "structureId": "biceps-brachii", "role": "secondary" }
+    ],
+    "cues": [
+      "Hinge to roughly 45 degrees with a flat back.",
+      "Pull the bar to the lower ribs, leading with the elbows.",
+      "Squeeze the shoulder blades together at the top."
+    ],
+    "commonMistakes": [
+      "Standing up more upright as the set fatigues.",
+      "Yanking with the arms instead of the back.",
+      "Rounding the spine under the load."
+    ],
+    "variations": [
+      { "id": "chest-supported-row", "name": "Chest-Supported Row", "note": "A bench removes lower-back strain.", "difficulty": "easier" },
+      { "id": "pendlay-row", "name": "Pendlay Row", "note": "Each rep resets on the floor for strict power.", "difficulty": "harder" }
+    ],
+    "studyIds": ["schoenfeld-2017-volume"]
+  },
+  {
+    "id": "dumbbell-biceps-curl",
+    "name": "Dumbbell Biceps Curl",
+    "focus": ["hypertrophy"],
+    "targets": [
+      { "structureId": "biceps-brachii", "role": "primary" },
+      { "structureId": "forearm-flexors", "role": "secondary" }
+    ],
+    "cues": [
+      "Keep the elbows pinned at the sides.",
+      "Curl through a full range and squeeze at the top.",
+      "Lower under control for two to three seconds."
+    ],
+    "commonMistakes": [
+      "Swinging the torso to heave the weight up.",
+      "Letting the elbows drift forward.",
+      "Using only a partial range of motion."
+    ],
+    "variations": [
+      { "id": "hammer-curl", "name": "Hammer Curl", "note": "Neutral grip adds forearm emphasis.", "difficulty": "alternate" },
+      { "id": "incline-curl", "name": "Incline Dumbbell Curl", "note": "Reclined position increases the stretch.", "difficulty": "harder" }
+    ],
+    "studyIds": ["schoenfeld-2010-hypertrophy", "schoenfeld-2017-volume"]
+  },
+  {
+    "id": "plank",
+    "name": "Front Plank",
+    "focus": ["endurance"],
+    "targets": [
+      { "structureId": "rectus-abdominis", "role": "primary" },
+      { "structureId": "obliques", "role": "secondary" },
+      { "structureId": "diaphragm", "role": "secondary" }
+    ],
+    "cues": [
+      "Stack the elbows under the shoulders.",
+      "Squeeze the glutes and brace as if bracing for a punch.",
+      "Keep a straight line from the ears to the heels."
+    ],
+    "commonMistakes": [
+      "Letting the hips sag toward the floor.",
+      "Piking the hips up into an easy position.",
+      "Holding the breath instead of breathing steadily."
+    ],
+    "variations": [
+      { "id": "knee-plank", "name": "Knee Plank", "note": "From the knees to reduce the load.", "difficulty": "easier" },
+      { "id": "long-lever-plank", "name": "Long-Lever Plank", "note": "Elbows further forward greatly raises difficulty.", "difficulty": "harder" }
+    ],
+    "studyIds": ["schoenfeld-2010-hypertrophy"]
+  },
+  {
+    "id": "standing-calf-raise",
+    "name": "Standing Calf Raise",
+    "focus": ["hypertrophy", "boneDensity"],
+    "targets": [
+      { "structureId": "gastrocnemius", "role": "primary" },
+      { "structureId": "tibia-fibula", "role": "secondary" }
+    ],
+    "cues": [
+      "Balls of the feet on the edge of a step.",
+      "Drop the heels for a full stretch, then rise onto the toes.",
+      "Pause briefly at the top of each rep."
+    ],
+    "commonMistakes": [
+      "Bouncing through a shortened range.",
+      "Rushing reps without a peak contraction.",
+      "Bending the knees to cheat the movement."
+    ],
+    "variations": [
+      { "id": "seated-calf-raise", "name": "Seated Calf Raise", "note": "Bent knee shifts work toward the soleus.", "difficulty": "alternate" },
+      { "id": "single-leg-calf-raise", "name": "Single-Leg Calf Raise", "note": "One leg doubles the relative load.", "difficulty": "harder" }
+    ],
+    "studyIds": ["schoenfeld-2017-volume", "hong-2018-resistance-bone"]
+  },
+  {
+    "id": "romanian-deadlift",
+    "name": "Romanian Deadlift",
+    "focus": ["hypertrophy", "strength"],
+    "targets": [
+      { "structureId": "hamstrings", "role": "primary" },
+      { "structureId": "gluteus-maximus", "role": "secondary" },
+      { "structureId": "vertebral-column", "role": "secondary" }
+    ],
+    "cues": [
+      "Start standing tall with a soft bend in the knees.",
+      "Push the hips back and slide the bar down the thighs.",
+      "Feel the hamstring stretch, then drive the hips forward to stand."
+    ],
+    "commonMistakes": [
+      "Turning it into a squat by bending the knees too much.",
+      "Rounding the back as the bar passes the knees.",
+      "Going lower than hamstring flexibility allows."
+    ],
+    "variations": [
+      { "id": "single-leg-rdl", "name": "Single-Leg RDL", "note": "Adds a balance and stability challenge.", "difficulty": "harder" },
+      { "id": "db-rdl", "name": "Dumbbell RDL", "note": "Dumbbells make the pattern easy to learn.", "difficulty": "easier" }
+    ],
+    "studyIds": ["schoenfeld-2017-load"]
+  },
+  {
+    "id": "zone-2-run",
+    "name": "Zone 2 Run",
+    "focus": ["endurance", "vo2max"],
+    "targets": [
+      { "structureId": "heart", "role": "primary" },
+      { "structureId": "lungs", "role": "primary" },
+      { "structureId": "quadriceps", "role": "secondary" },
+      { "structureId": "gastrocnemius", "role": "secondary" },
+      { "structureId": "vascular-network", "role": "secondary" }
+    ],
+    "cues": [
+      "Hold an easy, conversational pace you could sustain for an hour.",
+      "Breathe rhythmically through the nose where possible.",
+      "Keep a relaxed, upright posture with a quick cadence."
+    ],
+    "commonMistakes": [
+      "Drifting too fast so it becomes a moderate-hard effort.",
+      "Overstriding and landing heavily on the heels.",
+      "Skipping easy volume in favour of only hard sessions."
+    ],
+    "variations": [
+      { "id": "cycling-zone-2", "name": "Zone 2 Cycling", "note": "Low-impact alternative on a bike.", "difficulty": "alternate" },
+      { "id": "brisk-walk", "name": "Brisk Incline Walk", "note": "Lower-intensity entry point for beginners.", "difficulty": "easier" }
+    ],
+    "studyIds": ["seiler-2010-intensity-distribution", "milanovic-2015-hiit-vo2max"]
+  },
+  {
+    "id": "hiit-intervals",
+    "name": "HIIT Intervals",
+    "focus": ["vo2max", "endurance"],
+    "targets": [
+      { "structureId": "heart", "role": "primary" },
+      { "structureId": "lungs", "role": "primary" },
+      { "structureId": "vascular-network", "role": "secondary" },
+      { "structureId": "quadriceps", "role": "secondary" }
+    ],
+    "cues": [
+      "Warm up thoroughly before the first hard interval.",
+      "Push near-maximal effort for the work bout, then recover fully.",
+      "Keep work and rest periods consistent across the session."
+    ],
+    "commonMistakes": [
+      "Starting too hard and fading across the set.",
+      "Cutting recovery short so power drops off.",
+      "Doing high-intensity work on consecutive days without recovery."
+    ],
+    "variations": [
+      { "id": "bike-sprints", "name": "Bike Sprint Intervals", "note": "Low-impact, easy to control effort.", "difficulty": "alternate" },
+      { "id": "norwegian-4x4", "name": "4x4 Intervals", "note": "Four-minute efforts proven to raise VO2max.", "difficulty": "harder" }
+    ],
+    "studyIds": ["milanovic-2015-hiit-vo2max"]
+  },
+  {
+    "id": "diaphragmatic-breathing",
+    "name": "Diaphragmatic Breathing",
+    "focus": ["breathWork"],
+    "targets": [
+      { "structureId": "diaphragm", "role": "primary" },
+      { "structureId": "lungs", "role": "secondary" },
+      { "structureId": "rib-cage", "role": "secondary" }
+    ],
+    "cues": [
+      "Lie down with one hand on the chest and one on the belly.",
+      "Inhale slowly so the belly rises while the chest stays still.",
+      "Exhale longer than you inhale, fully emptying the lungs."
+    ],
+    "commonMistakes": [
+      "Breathing high into the chest and shoulders.",
+      "Rushing the exhale.",
+      "Tensing the neck and jaw during the breath."
+    ],
+    "variations": [
+      { "id": "box-breathing", "name": "Box Breathing", "note": "Equal counts to inhale, hold, exhale, hold.", "difficulty": "alternate" },
+      { "id": "seated-breathing", "name": "Seated Diaphragmatic Breathing", "note": "Practise the pattern upright once it is familiar.", "difficulty": "harder" }
+    ],
+    "studyIds": ["hamasaki-2020-diaphragmatic-breathing"]
+  }
+]
