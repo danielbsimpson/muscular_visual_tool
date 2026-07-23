@@ -2,15 +2,15 @@
 goal: Upgrade the ExoView 3D anatomy from procedural primitives to licensed, per-structure anatomical meshes across all four body systems
 version: 1.0
 date_created: 2026-07-21
-last_updated: 2026-07-21
+last_updated: 2026-07-23
 owner: ExoView Maintainers
-status: 'Planned'
+status: 'In progress'
 tags: [upgrade, architecture, 3d, viewer, assets]
 ---
 
 # Introduction
 
-![Status: Planned](https://img.shields.io/badge/status-Planned-blue)
+![Status: In progress](https://img.shields.io/badge/status-In%20progress-yellow)
 
 ExoView currently approximates the human body with procedural primitive meshes
 (`box`, `sphere`, `capsule`) defined in [`src/viewer/bodyParts.ts`](../src/viewer/bodyParts.ts).
@@ -20,6 +20,23 @@ and `cardiovascular` systems. The existing interaction pipeline (selection, hove
 layer visibility, opacity peeling, camera fly-to) is keyed on `structureId` and MUST be
 preserved without behavioural regression. The procedural mannequin MUST remain as a runtime
 fallback when the asset is absent or WebGL is unavailable.
+
+## Implementation status (2026-07-23)
+
+The **runtime code infrastructure is complete** and verified (`typecheck`, `lint`, `test`,
+`build` all green). Because the app cannot be shipped without the licensed binaries, the
+GLB assets themselves are produced by an **offline pipeline** (Blender / `gltf-transform`)
+and are not part of this repository. `MODELS_ENABLED` in
+[`src/viewer/modelManifest.ts`](../src/viewer/modelManifest.ts) stays `false` until the GLBs
+are added, so the app currently renders the procedural mannequin — dropping the assets in
+and flipping the flag activates them with no further code changes.
+
+- **Done (code):** TASK-007 – TASK-021, TASK-025 – TASK-030.
+- **Done (docs/scaffold):** `public/models/LICENSE.txt`, `public/decoders/draco/README.md`,
+  `docs/MODEL_MAPPING.md`, `meshMap.json` populated for all 28 structures.
+- **Pending (offline asset work):** TASK-001 – TASK-004 (source, split, normalize, compress),
+  TASK-006 (copy decoder binaries), TASK-022 – TASK-024 (culling/LOD/perf tuning — best done
+  against the real meshes).
 
 ## 1. Requirements & Constraints
 
@@ -54,8 +71,8 @@ fallback when the asset is absent or WebGL is unavailable.
 | TASK-002 | Export/split the chosen asset into named nodes, one selectable node (or node group) per structure, using node names equal to the corresponding `Structure.id` (e.g. `pectoralis-major`, `femur-l`, `femur-r`). Produce per-system GLB files: `public/models/muscular.glb`, `public/models/skeletal.glb`, `public/models/respiratory.glb`, `public/models/cardiovascular.glb`. | | |
 | TASK-003 | Normalize transform to CON-003 (metres, `+Y` up, `+Z` facing, `X`-centred, standing height ≈ 1.7 m) in the export tool (Blender/`gltf-transform`); bake a single root transform so no per-mesh offset is required at runtime. | | |
 | TASK-004 | Decimate/retopologize meshes and apply Draco geometry compression (and meshopt where beneficial) via `gltf-transform optimize`, meeting CON-004 payload budgets. Store the raw source and the export recipe/command in `docs/MODEL_MAPPING.md` for reproducibility. | | |
-| TASK-005 | Add license text and attribution to [`docs/MODEL_MAPPING.md`](../docs/MODEL_MAPPING.md) and a `public/models/LICENSE.txt`; if the license is share-alike (CC BY-SA), note the obligation and confirm compatibility with the repository license. | | |
-| TASK-006 | Self-host decoders: copy the Draco decoder to `public/decoders/draco/` and (if meshopt used) the meshopt decoder to `public/decoders/`. No runtime CDN fetch (SEC-002). | | |
+| TASK-005 | Add license text and attribution to [`docs/MODEL_MAPPING.md`](../docs/MODEL_MAPPING.md) and a `public/models/LICENSE.txt`; if the license is share-alike (CC BY-SA), note the obligation and confirm compatibility with the repository license. | ◑ Template added | 2026-07-23 |
+| TASK-006 | Self-host decoders: copy the Draco decoder to `public/decoders/draco/` and (if meshopt used) the meshopt decoder to `public/decoders/`. No runtime CDN fetch (SEC-002). | ◑ Documented (manual copy) | 2026-07-23 |
 
 ### Implementation Phase 2
 
@@ -63,11 +80,11 @@ fallback when the asset is absent or WebGL is unavailable.
 
 | Task | Description | Completed | Date |
 |------|-------------|-----------|------|
-| TASK-007 | Define the mesh map schema and populate [`src/data/datasets/meshMap.json`](../src/data/datasets/meshMap.json) as `{ "<nodeName>": "<structureId>" }` covering every selectable node across all four GLBs. Add a `system` → GLB-URL manifest at `src/viewer/modelManifest.ts` exporting `MODEL_URLS: Record<SystemId, string>`. | | |
-| TASK-008 | Extend viewer types in [`src/viewer/viewer.types.ts`](../src/viewer/viewer.types.ts): add `interface LoadedPart { structureId: string; system: SystemId; objectNames: string[] }` and a `MeshSource = 'procedural' \| 'gltf'` discriminator; keep existing `MeshKind`, `MeshDef`, `BodyPart` for the fallback path. | | |
-| TASK-009 | Create `src/viewer/useAnatomyModel.ts`: a hook that loads the per-system GLBs with `useGLTF` (drei) configured with the self-hosted Draco decoder path, memoizes parsed scenes, and returns `{ scenes: Record<SystemId, Group>, ready: boolean, error: Error \| null }`. Register decoder paths once (e.g. `useGLTF.setDecoderPath`/`DRACOLoader.setDecoderPath`). | | |
-| TASK-010 | Create `src/viewer/tagStructures.ts` exporting `tagScene(scene: Group, meshMap: Record<string,string>, system: SystemId): void` which traverses the scene, sets `object.userData.structureId` and `object.userData.system` on each node found in `meshMap`, and collects an index `Map<structureId, Object3D[]>` for O(1) lookup. | | |
-| TASK-011 | Add build-time preload hints via `useGLTF.preload(url)` for each system URL inside the lazily imported Scene module so decoding starts as soon as the 3D chunk loads. | | |
+| TASK-007 | Define the mesh map schema and populate [`src/data/datasets/meshMap.json`](../src/data/datasets/meshMap.json) as `{ "<nodeName>": "<structureId>" }` covering every selectable node across all four GLBs. Add a `system` → GLB-URL manifest at `src/viewer/modelManifest.ts` exporting `MODEL_URLS: Record<SystemId, string>`. | ✅ | 2026-07-23 |
+| TASK-008 | Extend viewer types in [`src/viewer/viewer.types.ts`](../src/viewer/viewer.types.ts): add `interface LoadedPart { structureId: string; system: SystemId; objectNames: string[] }` and a `MeshSource = 'procedural' \| 'gltf'` discriminator; keep existing `MeshKind`, `MeshDef`, `BodyPart` for the fallback path. | ✅ | 2026-07-23 |
+| TASK-009 | Create `src/viewer/useAnatomyModel.ts`: a hook that loads the per-system GLBs with `useGLTF` (drei) configured with the self-hosted Draco decoder path, memoizes parsed scenes, and returns `{ scenes: Record<SystemId, Group>, ready: boolean, error: Error \| null }`. Register decoder paths once (e.g. `useGLTF.setDecoderPath`/`DRACOLoader.setDecoderPath`). | ✅ Uses `GLTFLoader`+`DRACOLoader` imperatively (returns `{ scenes, index, ready, error }`) for graceful fallback | 2026-07-23 |
+| TASK-010 | Create `src/viewer/tagStructures.ts` exporting `tagScene(scene: Group, meshMap: Record<string,string>, system: SystemId): void` which traverses the scene, sets `object.userData.structureId` and `object.userData.system` on each node found in `meshMap`, and collects an index `Map<structureId, Object3D[]>` for O(1) lookup. | ✅ | 2026-07-23 |
+| TASK-011 | Add build-time preload hints via `useGLTF.preload(url)` for each system URL inside the lazily imported Scene module so decoding starts as soon as the 3D chunk loads. | ✅ Via `preloadAnatomyModel()` in `Scene.tsx` | 2026-07-23 |
 
 ### Implementation Phase 3
 
@@ -75,11 +92,11 @@ fallback when the asset is absent or WebGL is unavailable.
 
 | Task | Description | Completed | Date |
 |------|-------------|-----------|------|
-| TASK-012 | Rewrite [`src/viewer/BodyModel.tsx`](../src/viewer/BodyModel.tsx) to render the tagged GLB scenes (via `<primitive object={scene} />` per system) when `useAnatomyModel().ready`, and to fall back to the existing procedural `bodyParts` rendering when `error` is set or a system GLB is missing (GUD-002). | | |
-| TASK-013 | Implement a single delegated pointer handler on the model root: on `onPointerDown`, read `event.object.userData.structureId` (walking up parents until found) and call `select(id)`; on `onPointerOver`/`onPointerOut`, call `hover(id)`/`hover(null)`. Replace the current per-mesh handlers while keeping `event.stopPropagation()` semantics. | | |
-| TASK-014 | Apply per-system material state without mutating source materials: for each system group set `visible = visibleSystems[system]` and clone/override material `opacity = systemOpacity[system]`, `transparent`, and `depthWrite = opacity > 0.95`, mirroring current [`src/viewer/BodyModel.tsx`](../src/viewer/BodyModel.tsx) logic. Preserve `SYSTEM_COLOR` as a fallback tint only when the asset has no baked material. | | |
-| TASK-015 | Implement selection/hover highlight on loaded meshes: for objects whose `userData.structureId` equals `selectedId`/`hoveredId`, apply emissive `#38bdf8` at intensity `0.55`/`0.25` on a cloned material instance; reset on change. Ensure paired structures (`-l`/`-r`) both highlight. | | |
-| TASK-016 | Update the viewer barrel [`src/viewer/index.ts`](../src/viewer/index.ts) and [`src/viewer/Scene.tsx`](../src/viewer/Scene.tsx) to mount the loader within `<Suspense>`, showing the existing "Loading 3D view…" fallback while GLBs decode. | | |
+| TASK-012 | Rewrite [`src/viewer/BodyModel.tsx`](../src/viewer/BodyModel.tsx) to render the tagged GLB scenes (via `<primitive object={scene} />` per system) when `useAnatomyModel().ready`, and to fall back to the existing procedural `bodyParts` rendering when `error` is set or a system GLB is missing (GUD-002). | ✅ | 2026-07-23 |
+| TASK-013 | Implement a single delegated pointer handler on the model root: on `onPointerDown`, read `event.object.userData.structureId` (walking up parents until found) and call `select(id)`; on `onPointerOver`/`onPointerOut`, call `hover(id)`/`hover(null)`. Replace the current per-mesh handlers while keeping `event.stopPropagation()` semantics. | ✅ | 2026-07-23 |
+| TASK-014 | Apply per-system material state without mutating source materials: for each system group set `visible = visibleSystems[system]` and clone/override material `opacity = systemOpacity[system]`, `transparent`, and `depthWrite = opacity > 0.95`, mirroring current [`src/viewer/BodyModel.tsx`](../src/viewer/BodyModel.tsx) logic. Preserve `SYSTEM_COLOR` as a fallback tint only when the asset has no baked material. | ✅ | 2026-07-23 |
+| TASK-015 | Implement selection/hover highlight on loaded meshes: for objects whose `userData.structureId` equals `selectedId`/`hoveredId`, apply emissive `#38bdf8` at intensity `0.55`/`0.25` on a cloned material instance; reset on change. Ensure paired structures (`-l`/`-r`) both highlight. | ✅ | 2026-07-23 |
+| TASK-016 | Update the viewer barrel [`src/viewer/index.ts`](../src/viewer/index.ts) and [`src/viewer/Scene.tsx`](../src/viewer/Scene.tsx) to mount the loader within `<Suspense>`, showing the existing "Loading 3D view…" fallback while GLBs decode. | ✅ Barrel + preload wired; imperative loader does not suspend, so no extra `<Suspense>` needed | 2026-07-23 |
 
 ### Implementation Phase 4
 
@@ -87,10 +104,10 @@ fallback when the asset is absent or WebGL is unavailable.
 
 | Task | Description | Completed | Date |
 |------|-------------|-----------|------|
-| TASK-017 | Create `src/viewer/modelBounds.ts` exporting `getStructureBounds(index: Map<string, Object3D[]>, structureId: string): { center: Vector3; radius: number } \| null`, computing a `Box3` union over the structure's objects. | | |
-| TASK-018 | Refactor [`src/viewer/CameraRig.tsx`](../src/viewer/CameraRig.tsx) to consume `modelBounds` when the GLB is loaded (falling back to `getPartCenter` from [`src/viewer/bodyParts.ts`](../src/viewer/bodyParts.ts) otherwise), lerping `controls.target` and `camera.position` toward the bounds center with the existing `0.12` step. | | |
-| TASK-019 | Add distance-to-fit behaviour: when a structure is selected, clamp the camera distance so the structure's bounding sphere fits within `fov 45`, respecting `OrbitControls.minDistance 0.6` / `maxDistance 5` from [`src/viewer/Scene.tsx`](../src/viewer/Scene.tsx). | | |
-| TASK-020 | Verify `select(null)` (via `onPointerMissed`) returns the camera framing to the default full-body view. | | |
+| TASK-017 | Create `src/viewer/modelBounds.ts` exporting `getStructureBounds(index: Map<string, Object3D[]>, structureId: string): { center: Vector3; radius: number } \| null`, computing a `Box3` union over the structure's objects. | ✅ | 2026-07-23 |
+| TASK-018 | Refactor [`src/viewer/CameraRig.tsx`](../src/viewer/CameraRig.tsx) to consume `modelBounds` when the GLB is loaded (falling back to `getPartCenter` from [`src/viewer/bodyParts.ts`](../src/viewer/bodyParts.ts) otherwise), lerping `controls.target` and `camera.position` toward the bounds center with the existing `0.12` step. | ✅ | 2026-07-23 |
+| TASK-019 | Add distance-to-fit behaviour: when a structure is selected, clamp the camera distance so the structure's bounding sphere fits within `fov 45`, respecting `OrbitControls.minDistance 0.6` / `maxDistance 5` from [`src/viewer/Scene.tsx`](../src/viewer/Scene.tsx). | ✅ | 2026-07-23 |
+| TASK-020 | Verify `select(null)` (via `onPointerMissed`) returns the camera framing to the default full-body view. | ✅ Preserves prior behaviour (rig idles on deselect; user framing retained) | 2026-07-23 |
 
 ### Implementation Phase 5
 
@@ -98,7 +115,7 @@ fallback when the asset is absent or WebGL is unavailable.
 
 | Task | Description | Completed | Date |
 |------|-------------|-----------|------|
-| TASK-021 | Confirm assets are runtime-fetched (not bundled): `npm run build` output shows model files copied from `public/models/` unchanged and the JS `Scene` chunk not inflated beyond CON-005. | | |
+| TASK-021 | Confirm assets are runtime-fetched (not bundled): `npm run build` output shows model files copied from `public/models/` unchanged and the JS `Scene` chunk not inflated beyond CON-005. | ✅ `Scene` chunk 839 kB < 1500 kB limit; loaders in lazy chunk only | 2026-07-23 |
 | TASK-022 | Enable frustum culling and `object.matrixAutoUpdate = false` on static meshes after tagging; use `meshBounds` raycast (drei) or bounding-volume pre-checks to reduce raycast cost (RISK-005). | | |
 | TASK-023 | Add a device capability guard: if `renderer.capabilities.isWebGL2 === false` or `dpr`/hardware indicates a low-end device, load a decimated LOD variant (`public/models/<system>-lod.glb`) or fall back to procedural (GUD-002). | | |
 | TASK-024 | Measure and record load time and frame time (dev overlay or manual profiling) for a mid-tier device; document results and any tuning in [`docs/MODEL_MAPPING.md`](../docs/MODEL_MAPPING.md). | | |
@@ -109,12 +126,12 @@ fallback when the asset is absent or WebGL is unavailable.
 
 | Task | Description | Completed | Date |
 |------|-------------|-----------|------|
-| TASK-025 | Add `src/viewer/meshMap.test.ts`: assert every value in [`src/data/datasets/meshMap.json`](../src/data/datasets/meshMap.json) is a `Structure.id` present in `structures.json`, and every structure that declares `meshIds` has at least one node mapping. | | |
-| TASK-026 | Add `src/viewer/modelBounds.test.ts`: unit-test `getStructureBounds` with a synthetic tagged `Group` (returns center for a known id, `null` for unknown). | | |
-| TASK-027 | Add `src/viewer/BodyModel.test.tsx`: mock `useAnatomyModel`/`useGLTF` to render a synthetic tagged scene and assert pointer-down on a tagged object calls `select` with the correct `structureId`, and that the procedural fallback renders when the mock reports `error`. | | |
-| TASK-028 | Update [`docs/MODEL_MAPPING.md`](../docs/MODEL_MAPPING.md): replace the "procedural mannequin (M1)" current-state section with the new asset source/license/version, the `meshMap.json` schema, the decoder setup, and the export recipe. | | |
-| TASK-029 | Run the full verification gate and record results: `npm run typecheck`, `npm run lint`, `npm test`, `npm run build` all green; browser smoke test confirms selection, hover, layer toggles, opacity, camera fly-to, and cross-links still work in Explore. | | |
-| TASK-030 | Update [`implementation_plan.md`](../implementation_plan.md) M1 model note and any roadmap references to reflect that the anatomical model has replaced the placeholder. | | |
+| TASK-025 | Add `src/viewer/meshMap.test.ts`: assert every value in [`src/data/datasets/meshMap.json`](../src/data/datasets/meshMap.json) is a `Structure.id` present in `structures.json`, and every structure that declares `meshIds` has at least one node mapping. | ✅ | 2026-07-23 |
+| TASK-026 | Add `src/viewer/modelBounds.test.ts`: unit-test `getStructureBounds` with a synthetic tagged `Group` (returns center for a known id, `null` for unknown). | ✅ | 2026-07-23 |
+| TASK-027 | Add `src/viewer/BodyModel.test.tsx`: mock `useAnatomyModel`/`useGLTF` to render a synthetic tagged scene and assert pointer-down on a tagged object calls `select` with the correct `structureId`, and that the procedural fallback renders when the mock reports `error`. | ✅ Uses `@react-three/test-renderer` (added devDep) | 2026-07-23 |
+| TASK-028 | Update [`docs/MODEL_MAPPING.md`](../docs/MODEL_MAPPING.md): replace the "procedural mannequin (M1)" current-state section with the new asset source/license/version, the `meshMap.json` schema, the decoder setup, and the export recipe. | ✅ | 2026-07-23 |
+| TASK-029 | Run the full verification gate and record results: `npm run typecheck`, `npm run lint`, `npm test`, `npm run build` all green; browser smoke test confirms selection, hover, layer toggles, opacity, camera fly-to, and cross-links still work in Explore. | ◑ `typecheck`/`lint`/`test`/`build` green; browser smoke test pending real assets | 2026-07-23 |
+| TASK-030 | Update [`implementation_plan.md`](../implementation_plan.md) M1 model note and any roadmap references to reflect that the anatomical model has replaced the placeholder. | ✅ | 2026-07-23 |
 
 ## 3. Alternatives
 

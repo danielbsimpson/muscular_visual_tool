@@ -3,6 +3,10 @@ import { OrbitControls } from '@react-three/drei';
 import { useViewerStore } from '@/state/store';
 import { BodyModel } from './BodyModel';
 import { CameraRig } from './CameraRig';
+import { preloadAnatomyModel } from './useAnatomyModel';
+
+// Begin decoding the anatomy GLBs as soon as this (lazy) 3D chunk loads (TASK-011).
+preloadAnatomyModel();
 
 export function Scene() {
   const select = useViewerStore((s) => s.select);

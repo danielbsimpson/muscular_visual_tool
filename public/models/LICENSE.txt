@@ -1,0 +1,33 @@
+ExoView anatomical model assets
+================================
+
+This directory holds the per-system anatomical GLB assets loaded at runtime by
+the 3D viewer:
+
+  muscular.glb
+  skeletal.glb
+  respiratory.glb
+  cardiovascular.glb
+
+These binary assets are NOT included in the repository. They must be produced by
+the offline asset pipeline documented in docs/MODEL_MAPPING.md from a
+license-cleared source (e.g. Z-Anatomy or BodyParts3D, both CC BY-SA).
+
+License and attribution
+-----------------------
+
+Record the chosen source, its license, version, and required attribution below
+before distributing any asset. If the source is share-alike (CC BY-SA), this
+project's redistribution of the derived assets must comply with that license.
+
+  Source:        <fill in>
+  License:       <fill in, e.g. CC BY-SA 4.0>
+  Version/date:  <fill in>
+  Attribution:   <fill in>
+  Modifications: Split into per-system GLBs, node names renamed to Structure ids,
+                 transform normalized (metres, +Y up, +Z facing, X-centred,
+                 standing height ~1.7 m), decimated and Draco-compressed.
+
+Until the GLB files are added here and `MODELS_ENABLED` is set to `true` in
+src/viewer/modelManifest.ts, the viewer renders the procedural mannequin
+fallback and no assets are fetched.

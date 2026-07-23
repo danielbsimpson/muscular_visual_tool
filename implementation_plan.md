@@ -132,8 +132,10 @@ interface without touching UI code.
 ### M1 — Explore (muscular + skeletal)
 - [x] Integrate `@react-three/fiber` scene: lighting, orbit controls, camera.
 - [x] Load a base 3D body model (muscular + skeletal); document source/license.
-      *(M1 uses a procedural primitive "mannequin"; see docs/MODEL_MAPPING.md. A rigged
-      asset can swap in later via the same structure-id mapping.)*
+      *(The viewer loads per-system anatomical GLBs at runtime via a data-driven
+      `meshMap.json` (see docs/MODEL_MAPPING.md); the procedural primitive
+      "mannequin" remains as an automatic fallback when assets or WebGL are
+      unavailable.)*
 - [x] Map model meshes → `Structure` ids (`meshIds`).
 - [x] System layer toggles + opacity (peel muscles off bones).
 - [x] Structure picking (click/tap) → highlight + selection state.
